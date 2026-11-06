@@ -6,7 +6,7 @@
 <div class="card" id="cloudPanel" style="border:2px solid #176c71">
 <h2>🔗 2人のスマホをつなぐ</h2>
 <p id="syncStatus" class="warn">現在はこのスマホだけの保存です。2人で共有するには下の接続設定が必要です。</p>
-<details id="cloudSetup"><summary style="font-weight:800;cursor:pointer">初回だけ：クラウド接続設定を開く</summary>
+<details id="cloudSetup"><summary style="font-weight:800;cursor:pointer">接続設定（通常は触らなくてOK）</summary>
 <p><small>公開済みのSupabaseプロジェクトのURLと公開用キーを入力。secret/service_role キーは絶対に入れないでね。</small></p>
 <label>Project URL<input id="projectUrl" class="field" placeholder="https://xxxxx.supabase.co" autocomplete="off"></label>
 <label>Publishable key<input id="publishableKey" class="field" placeholder="sb_publishable_..." autocomplete="off"></label>
@@ -16,6 +16,9 @@
 <label>メールアドレス<input id="loginEmail" type="email" class="field" placeholder="example@gmail.com"></label>
 <button id="sendMail" class="btn primary" type="button" style="margin-top:8px">ログイン用メールを送る</button>
 <p><small>届いたメールのリンクを、このWebアプリを開いているブラウザで押してログインするよ。</small></p>
+<div id="codeBox" class="hide"><label>メールに6桁のコードがあるとき<input id="loginCode" class="field" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="123456"></label>
+<button id="verifyCode" class="btn primary" type="button" style="margin-top:8px">コードでログイン</button>
+<p><small>ホーム画面から開いているアプリでは、リンクがSafariで開いてしまうことがあります。その場合はコードの入力が確実です。</small></p></div>
 </div>
 <div id="cloudPair" class="hide" style="margin-top:12px">
 <p><b id="userEmail"></b> としてログイン中</p>
@@ -199,17 +202,34 @@ window.studyCloud={
  async upload(path,blob){const {error}=await db.storage.from('study-photos').upload(path,blob,{contentType:'image/jpeg',upsert:false});if(error)throw error},
  async sign(paths){const {data,error}=await db.storage.from('study-photos').createSignedUrls(paths,3600);if(error)throw error;return data}
 };
+// Publishable key is public by design (safe to embed). NEVER put a secret/service_role key here.
+const DEFAULT_URL='https://gtovggxktcbeecusmgtl.supabase.co',DEFAULT_KEY='sb_publishable_2MRj-XuosQTMUXiA7KOFcg_2cB7OlM8';
 let config={};try{config=JSON.parse(localStorage.getItem(CFG)||'{}')}catch{}
+if(config.custom===undefined&&config.url&&config.key&&(config.url!==DEFAULT_URL||config.key!==DEFAULT_KEY))config.custom=true; // keep a different project saved by an older version
+if(!config.custom)config={url:DEFAULT_URL,key:DEFAULT_KEY};
+let manualLogout=false;
+try{navigator.storage?.persist?.().catch(()=>{})}catch{}
+const explain=e=>{const m=String(e?.message||e||'');
+ if(!navigator.onLine)return 'ネットにつながっていません。電波やWi-Fiを確認してね。';
+ if(/Failed to fetch|NetworkError|Load failed|network/i.test(m))return 'Supabaseにつながりません（通信状態、またはProject URLの間違い）。';
+ if(/Invalid API key|apikey/i.test(m))return 'Publishable keyが正しくありません。';
+ if(/Refresh Token|refresh_token|JWT expired|invalid JWT/i.test(m))return 'ログインの有効期限が切れました。もう一度ログインしてね。';
+ if(/row-level security|permission denied|42501/i.test(m))return '権限がありません（家族に参加しているか確認してね）。';
+ if(/expired|invalid.*(token|otp)|token.*(expired|invalid)/i.test(m))return 'コードまたはリンクが期限切れか間違いです。もう一度メールを送ってね。';
+ return m};
+try{const le=localStorage.getItem('chiharadai-last-email');if(le)$('loginEmail').value=le}catch{}
 $('projectUrl').value=config.url||'';$('publishableKey').value=config.key||'';
 async function connect(){
  try {
   const url=$('projectUrl').value.trim(),key=$('publishableKey').value.trim();
   if(!/^https:\/\/[\w-]+\.supabase\.co$/.test(url)||!key.startsWith('sb_publishable_'))throw Error('正しいProject URLと公開用キーを入力してね。');
-  const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2.57.0');
+  if(!navigator.onLine){status('ネットにつながっていません。つながると自動で接続するよ。');return}
+  let mod;try{mod=await import('https://esm.sh/@supabase/supabase-js@2.57.0')}catch(e){throw Error('Supabaseの部品を読み込めません（通信状態を確認してね）。')}
+  const {createClient}=mod;
   db=createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-  localStorage.setItem(CFG,JSON.stringify({url,key}));
+  localStorage.setItem(CFG,JSON.stringify({url,key,custom:url!==DEFAULT_URL||key!==DEFAULT_KEY}));
   // Register the listener first so the SIGNED_IN event from the email-link callback is never missed.
-  db.auth.onAuthStateChange((_event,session)=>{const nu=session?.user||null;const same=!!nu&&nu.id===bootUid&&nu.id===user?.id;user=nu;if(!same)setTimeout(()=>bootstrap(),20)});
+  db.auth.onAuthStateChange((_event,session)=>{if(_event==='SIGNED_OUT'&&!manualLogout&&bootUid)authErr='ログインの有効期限が切れました。もう一度ログインしてね。';const nu=session?.user||null;const same=!!nu&&nu.id===bootUid&&nu.id===user?.id;user=nu;if(!same)setTimeout(()=>bootstrap(),20)});
   // getSession waits for the URL callback (token in the link) to be processed before returning.
   const hp=new URLSearchParams((location.hash||'').replace(/^#/,'')),qp=new URLSearchParams(location.search);
   authErr=(hp.get('error_description')||qp.get('error_description')||'').replace(/\+/g,' ');
@@ -217,7 +237,7 @@ async function connect(){
   const {data,error}=await db.auth.getSession();if(error)throw error;
   user=data?.session?.user||null;
   await bootstrap();
- }catch(e){status('接続エラー：'+(e.message||String(e)));}
+ }catch(e){db=null;status('接続エラー：'+explain(e));}
 }
 async function bootstrap(){
  if(loading){pending=true;return}loading=true;pending=false;
@@ -225,7 +245,7 @@ async function bootstrap(){
   $('cloudAuth').classList.toggle('hide',!!user);
   $('cloudPair').classList.toggle('hide',!user);
   $('userEmail').textContent=user?.email||'';
-  if(!user){member=null;family=null;status(authErr?'ログインリンクが使えませんでした：'+authErr+'（もう一度メールを送ってね）':'クラウドに接続済み。メールでログインしてね。');return;}
+  if(!user){member=null;family=null;status(authErr?(/期限/.test(authErr)?authErr:'ログインリンクが使えませんでした：'+authErr+'（もう一度メールを送ってね）'):'クラウドに接続済み。メールでログインしてね。');return;}
   authErr='';
   const {data,error}=await db.from('study_members').select('family_id,role').eq('user_id',user.id).maybeSingle();if(error)throw error;
   member=data||null;family=member?.family_id||null;
@@ -241,7 +261,7 @@ async function bootstrap(){
    await pull();window.studyBridge.view(member.role==='parent'?'parent':'student');
    status('✅ 同期接続中。'+(member.role==='parent'?'息子くんの最新の記録を表示しています。':'チェックした記録をクラウドに保存します。'),true);
   }else{status('ログイン済み。保護者は家族を作成、息子くんは招待コードで参加してね。',true)}
- }catch(e){status('設定確認：'+e.message)}finally{bootUid=user?.id||null;loading=false;if(pending){pending=false;setTimeout(()=>bootstrap(),0)}}
+ }catch(e){status('設定確認：'+explain(e))}finally{bootUid=user?.id||null;loading=false;if(pending){pending=false;setTimeout(()=>bootstrap(),0)}}
 }
 async function pull(){if(!family||!db||dirty)return;const g=gen;try{
  const {data,error}=await db.from('study_records').select('payload').eq('family_id',family).single();if(error)throw error;
@@ -255,15 +275,17 @@ async function push(){if(!family||member?.role!=='student'||!db)return;
 }
 window.studyCloudSave=()=>{if(remoteLoad||member?.role!=='student')return;dirty=true;gen++;clearTimeout(timer);timer=setTimeout(()=>push().catch(e=>status('同期エラー：'+e.message)),600)};
 $('connectCloud').onclick=connect;
-$('sendMail').onclick=async()=>{if(!db)return;const email=$('loginEmail').value.trim();if(!email.includes('@'))return status('メールアドレスを入力してね');const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});status(error?'メール送信エラー：'+error.message:'メールを送ったよ。届いたログインリンクを開いてね。')};
+$('sendMail').onclick=async()=>{if(!db)await connect();if(!db)return;const email=$('loginEmail').value.trim();if(!email.includes('@'))return status('メールアドレスを入力してね');try{localStorage.setItem('chiharadai-last-email',email)}catch{}const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});if(!error)$('codeBox').classList.remove('hide');status(error?'メール送信エラー：'+explain(error):'メールを送ったよ。届いたリンクを開くか、メールに6桁のコードがあれば下に入力してね。')};
+$('verifyCode').onclick=async()=>{if(!db)return;const email=$('loginEmail').value.trim(),token=$('loginCode').value.replace(/\s/g,'');if(!email.includes('@')||!token)return status('メールアドレスとコードを入力してね');const {error}=await db.auth.verifyOtp({email,token,type:'email'});if(error)status('ログインできません：'+explain(error))};
+window.addEventListener('online',()=>{if(!db)connect()});
 $('makeFamily').onclick=async()=>{if(!db||!user)return;const {error}=await db.rpc('study_create_family');if(error)return status(error.message);await bootstrap()};
 $('joinFamily').onclick=async()=>{if(!db||!user)return;const code=$('familyCode').value.trim().toLowerCase();const {error}=await db.rpc('study_join_family',{p_code:code});if(error)return status('参加できません：'+error.message);await bootstrap()};
 $('copyCode').onclick=async()=>{try{await navigator.clipboard.writeText($('showCode').value);status('招待コードをコピーしたよ。息子くんだけに送ってね。',true)}catch{ $('showCode').select();status('招待コードを選択したよ。長押しでコピーしてね。')}};
 $('refreshCloud').onclick=()=>pull();
-$('logoutCloud').onclick=async()=>{if(db)await db.auth.signOut();member=null;family=null;location.reload()};
+$('logoutCloud').onclick=async()=>{manualLogout=true;if(db)await db.auth.signOut();member=null;family=null;location.reload()};
 // Periodic refresh helps the parent see new records even if live subscriptions are unavailable.
 setInterval(()=>{if(member?.role==='parent'&&document.visibilityState==='visible')pull()},15000);
 window.addEventListener('focus',()=>{if(member?.role==='parent')pull()});
-if(config.url&&config.key)connect();
+connect();
 </script>
 </body></html>
