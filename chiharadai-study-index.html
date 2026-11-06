@@ -1,0 +1,199 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#176c71"><title>千原台への道｜今日の勉強</title><style>
+:root{--bg:#f3f7f8;--ink:#1d3542;--muted:#637b86;--brand:#176c71;--light:#e6f2f0;--line:#dae5e9;--white:#fff;--gold:#c38124}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}main{max-width:720px;margin:0 auto;padding:18px 14px 80px}h1{font-size:23px;line-height:1.35;margin:3px 0}h2{font-size:18px;margin:0 0 12px}h3{font-size:15px;margin:0 0 6px}p{margin:7px 0}small,.muted{color:var(--muted)}small{font-size:12px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.pill{border-radius:99px;background:#e1f0ed;color:var(--brand);font-size:12px;padding:6px 10px;font-weight:700}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0 12px}.tabs button,.btn{font:inherit;cursor:pointer;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:11px 12px;font-weight:700}.tabs button.active,.btn.primary{background:var(--brand);border-color:var(--brand);color:white}.btn:disabled{opacity:.5;cursor:not-allowed}.card{background:var(--white);border:1px solid var(--line);border-radius:18px;margin:12px 0;padding:16px;box-shadow:0 3px 16px #25465b08}.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.statgrid .card{margin:0}.num{font-weight:800;font-size:26px;font-variant-numeric:tabular-nums}.bar{height:10px;border-radius:20px;background:#e7eff0;overflow:hidden}.bar>span{display:block;height:100%;background:var(--brand);transition:width .2s}.datebar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.datebar input,.field,textarea,select{font:inherit;background:white;border:1px solid #cbd9de;border-radius:9px;padding:9px;max-width:100%;color:var(--ink)}.datebar input{flex:1;min-width:150px}textarea{width:100%;min-height:70px;resize:vertical}.field{width:100%}.task{border:1px solid var(--line);border-radius:14px;padding:13px;margin:9px 0;background:#fff}.task.done{background:#f2faf7}.fallback-task{display:flex;align-items:center;gap:16px;cursor:pointer}.fallback-task input{width:30px;height:30px;accent-color:var(--brand);flex-shrink:0}.fallback-task .tasknotes{display:block;margin-top:5px}.fallback-task:has(input:checked){background:#e6f6ef;border-color:#176c71}.fallback-task:has(input:checked) .taskname:after{content:" ✓ 完了";color:#176c71}.taskhead{display:flex;align-items:flex-start;gap:11px}.taskhead input{width:22px;height:22px;accent-color:var(--brand);margin-top:2px;flex-shrink:0}.taskbody{flex:1;min-width:0}.taskname{font-size:15px;font-weight:800}.taskmeta{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.tag{border-radius:7px;background:#eef3f6;padding:2px 7px;font-size:11px;color:#46606a}.tasknotes{font-size:13px;color:#526873}.taskextra{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 0 34px}.taskextra input{width:75px}.taskextra select{max-width:145px}.warn{border-left:4px solid var(--gold);padding:10px 12px;background:#fff8e9;border-radius:8px;font-size:13px}.success{color:#18765c;font-weight:750}.timeline{border-left:3px solid #d9e6e5;padding-left:14px;margin-left:5px}.milestone{position:relative;margin:13px 0}.milestone:before{content:"";position:absolute;left:-21px;top:7px;width:10px;height:10px;border-radius:50%;background:#69a5a2}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.borderbottom{border-bottom:1px solid var(--line);padding:9px 0}.blank{padding:13px;background:#f1f7f7;border-radius:10px}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{flex:1;min-width:145px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:9px 4px;border-bottom:1px solid var(--line);text-align:left}th:last-child,td:last-child{text-align:right}.hide{display:none!important}footer{font-size:12px;color:var(--muted);line-height:1.7;margin:20px 3px}label{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #83c4b9}@media(min-width:520px){main{padding:24px}.card{padding:20px}}@media print{.tabs,.datebar button,.actions,footer,.taskextra,.top .pill{display:none!important}main{max-width:100%}body{background:white}.card{box-shadow:none}}
+</style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="千原台への道"><meta name="apple-mobile-web-app-status-bar-style" content="default"></head><body><main>
+<div class="top"><div><small>2026/11/06から毎日使える｜テスト範囲対応版</small><h1>📚 千原台への道</h1><small>情報ビジネス探究科｜毎日の勉強チェック</small></div><span class="pill">目標 まず100点 → 120点</span></div>
+
+<div class="card" id="cloudPanel" style="border:2px solid #176c71">
+<h2>🔗 2人のスマホをつなぐ</h2>
+<p id="syncStatus" class="warn">現在はこのスマホだけの保存です。2人で共有するには下の接続設定が必要です。</p>
+<details id="cloudSetup"><summary style="font-weight:800;cursor:pointer">初回だけ：クラウド接続設定を開く</summary>
+<p><small>公開済みのSupabaseプロジェクトのURLと公開用キーを入力。secret/service_role キーは絶対に入れないでね。</small></p>
+<label>Project URL<input id="projectUrl" class="field" placeholder="https://xxxxx.supabase.co" autocomplete="off"></label>
+<label>Publishable key<input id="publishableKey" class="field" placeholder="sb_publishable_..." autocomplete="off"></label>
+<button class="btn primary" id="connectCloud" type="button" style="margin-top:10px">接続する</button>
+</details>
+<div id="cloudAuth" class="hide" style="margin-top:12px">
+<label>メールアドレス<input id="loginEmail" type="email" class="field" placeholder="example@gmail.com"></label>
+<button id="sendMail" class="btn primary" type="button" style="margin-top:8px">ログイン用メールを送る</button>
+<p><small>届いたメールのリンクを、このWebアプリを開いているブラウザで押してログインするよ。</small></p>
+</div>
+<div id="cloudPair" class="hide" style="margin-top:12px">
+<p><b id="userEmail"></b> としてログイン中</p>
+<div id="pairActions"><button id="makeFamily" class="btn primary" type="button">保護者として家族を作成</button><p>または息子くんは、保護者から共有された招待コードを入力してね。</p>
+<input id="familyCode" class="field" placeholder="32文字の招待コード" autocapitalize="none" autocomplete="off"><button class="btn" id="joinFamily" type="button" style="margin-top:7px">生徒として参加</button></div>
+<div id="familyReady" class="hide"><p id="myRole"></p><div id="inviteBlock" class="hide"><label>息子くん用の招待コード<input id="showCode" class="field" readonly></label><button class="btn" id="copyCode" type="button">招待コードをコピー</button></div><button id="refreshCloud" class="btn" type="button">最新の進捗に更新</button></div>
+<button id="logoutCloud" class="btn" type="button" style="margin-top:12px">ログアウト</button>
+</div>
+</div>
+<div id="previewNotice" class="warn">※ChatGPT内のファイルプレビューでは動作が制限される場合があります。離れたスマホとの同期には、Web公開とクラウド接続が必要です。</div><div class="tabs" role="tablist"><button id="studentTab" class="active" type="button">✏️ 勉強を記録</button><button id="parentTab" type="button">📊 進捗を見る</button></div>
+<div id="studentView">
+<div class="card"><h2>✅ 今日やること <span style="font-size:12px;color:#176c71">1日2〜3教科・45〜60分ずつ</span></h2><div class="datebar"><button class="btn" id="previous" type="button" aria-label="前の日">‹</button><input type="date" id="date" value="2026-11-06" min="2026-11-06" max="2027-03-12" aria-label="勉強する日"><button class="btn" id="next" type="button" aria-label="次の日">›</button><button class="btn" id="todayBtn" type="button">今日</button></div><div style="background:#eef7f5;border-radius:10px;padding:12px;margin-top:12px"><label for="cramDay"><b>📘 数学の塾に行く曜日</b></label><select id="cramDay" style="margin-left:8px"><option value="1">月曜日</option><option value="4">木曜日</option></select><div style="font-size:12px;color:#526873;margin-top:5px">塾の日は数学60分を塾での勉強として計算。予定が変わったらここで変更できるよ。</div></div><div class="card" style="margin:12px 0;background:#fff9eb;border-color:#edcf88"><b>📌 11月12・13日のテスト範囲を登録</b><p style="font-size:13px">11月11日までは中1・中2の総復習ではなく、今回のテスト範囲を最優先。学校から配られた範囲表のページや単元を入力してね。</p><div id="rangeFields"></div><small>登録した範囲は11月11日までの「今日やること」に表示されるよ。</small></div><p id="phase" class="muted"></p><div id="event"></div><div style="background:#e6f2f0;border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:700">👇 今日の勉強メニューはこのすぐ下！終わったらチェックしてね</div><div class="row"><span>今日の達成状況</span><strong id="dailyDone">0 / 0</strong></div><div class="bar"><span id="dailyProgress" style="width:0%"></span></div><p class="muted" id="dailyMinutes"></p></div>
+<div class="card" style="border:2px solid #176c71"><h2>📋 今日の勉強チェックリスト</h2><div id="taskList"><label class="task fallback-task"><input type="checkbox" aria-label="数学が終わった"><span class="taskbody"><span class="taskname">数学｜60分</span><span class="tasknotes">計算・方程式を復習。塾の日は塾の授業を含めてOK</span></span></label><label class="task fallback-task"><input type="checkbox" aria-label="理科が終わった"><span class="taskbody"><span class="taskname">理科｜60分</span><span class="tasknotes">学校のワークで基本用語・実験の問題を復習</span></span></label></div><div class="actions"><button class="btn" id="resetDay" type="button">この日のチェックを外す</button></div></div>
+<div class="card"><h2>今日のひとことメモ</h2><textarea id="dayMemo" placeholder="できるようになったこと、難しかった問題、塾で教わったことなど"></textarea><small>入力するとこの端末に自動保存されるよ。</small></div>
+<div class="card"><h2>🗓 テスト・出願・入試・合格発表</h2><div class="timeline">
+<div class="milestone"><b>2026/11/12・13</b>　校内テスト<br><small>基本問題の確認</small></div>
+<div class="milestone"><b>2026/12/1〜2027/2/7</b>　熊本国府高校 一般入試Web入力期間<br><small>受験料納入と書類提出は別途期限あり。中学校の指示を優先</small></div>
+<div class="milestone"><b>2027/1/12・13</b>　校内テスト<br><small>120点は挑戦目標</small></div>
+<div class="milestone"><b>2027/1/20〜25</b>　千原台 前期出願期間</div>
+<div class="milestone"><b>2027/2/2</b>　千原台 前期（特色）選抜</div>
+<div class="milestone"><b>2027/2/9</b>　千原台 前期 合格内定通知<br><small>正式な合格発表は3/12。前期の結果は学校経由で確認</small></div>
+<div class="milestone"><b>2027/2/5〜9</b>　熊本国府高校 一般入試の書類受付<br><small>Web入力・受験料納入期限にも注意</small></div>
+<div class="milestone"><b>2027/2/12〜17</b>　千原台 後期出願期間<br><small>前期で内定しなかった場合</small></div>
+<div class="milestone"><b>2027/2/16</b>　熊本国府高校 一般入試</div>
+<div class="milestone"><b>2027/2/19</b>　熊本国府高校 一般入試 合格発表<br><small>学校ホームページで確認</small></div>
+<div class="milestone"><b>2027/3/4・5</b>　千原台 後期（一般）選抜</div>
+<div class="milestone"><b>2027/3/12</b>　千原台 公立高校合格発表</div>
+</div><div class="warn">予定は参考日程です。学校から配布される募集要項・中学校の案内を優先してください。特に出願締切・入学金手続き期限に注意。</div></div>
+
+</div>
+<div id="parentView" class="hide"><div class="card"><h2>学習ダッシュボード</h2><div class="statgrid"><div class="card"><small>累計チェック完了</small><div class="num" id="sumDone">0件</div></div><div class="card"><small>累計学習時間</small><div class="num" id="sumTime">0分</div></div><div class="card"><small>直近7日の達成日</small><div class="num" id="lastWeek">0日</div></div><div class="card"><small>直近7日の勉強時間</small><div class="num" id="lastWeekTime">0分</div></div></div><p class="muted">記録した時間とチェック済み項目を集計。空白は未入力で、勉強していないと断定するものではないよ。</p></div><div class="card"><h2>教科別の勉強時間</h2><div id="subjectTotals"></div></div><div class="card"><h2>直近14日の記録</h2><div id="history"></div></div><div class="card"><h2>テストの点数記録</h2><p class="muted">5教科合計（250点満点）。結果が出たら記録しよう。</p><div id="scoreRows"></div></div></div>
+<div class="card"><h2>データの保存と共有</h2><div class="warn"><b>未接続時は試作品（端末内保存）です。</b><br>上部の「2人のスマホをつなぐ」でクラウド接続し、Web上に公開すると別々のスマホから共有できます。未接続の場合は端末内保存のみ。</div><div class="actions" style="margin-top:12px"><button class="btn" id="exportBtn" type="button">記録をファイルに保存</button><button class="btn" id="importBtn" type="button">保存した記録を読み込む</button></div><input type="file" id="importFile" accept="application/json,.json" class="hide"><small>ファイルを相手に送って読み込むことはできるけど、リアルタイム共有ではないよ。</small></div>
+<footer>このアプリは学習計画用の試作品です。学校の出題範囲や塾の宿題に応じて内容を変更してね。目標点は合格を保証するものではありません。</footer>
+</main><script>
+(()=>{'use strict';
+const START='2026-11-06', END='2027-03-12', KEY='chiharadai-study-v2', SETKEY='chiharadai-cram-day';
+const S=['数学','理科','英語','社会','国語'];
+const EXAM_RANGES={
+ '数学':'教科書P92〜133／数学の友P44〜59。1・2年の計算等も5〜10点',
+ '理科':'教科書P100〜153（P237以降の補充資料も対象）／問題集P24〜42・44・45・46①・47。生物は生態系、化学はダニエル電池除外。単元テスト・配布プリント',
+ '英語':'教科書P47〜76／英語の基本学習P40〜71／語順トレーニングP15〜25',
+ '社会':'公民教科書P44〜99／公民ワークP43まで（地方自治は除外）。提出物を確認',
+ '国語':'教科書P100〜110・118〜127・142〜145・172〜190／国語の学習P56〜65・69〜79・95〜99・114〜129／単元テスト5・6・8・10／漢字・文法ミニテスト'
+};
+const PRE_DAY={
+ '2026-11-06':[['数学',60,'教科書P92〜106を読み、数学の友P44〜48を解く。解けなかった計算・方程式に印をつけ、最後に解き直す。'],['理科',60,'教科書P100〜118と問題集P24〜29。重要語句・実験図を確認し、間違えた問題を2回解く。']],
+ '2026-11-07':[['英語',60,'教科書P47〜61、英語の基本学習P40〜51。単語と本文の意味を確認して、解き直す。'],['社会',60,'公民教科書P44〜65。公民ワークの該当ページを解き、憲法と人権の重要語句を確認。'],['国語',60,'教科書P100〜110・118〜127、国語の学習P56〜65・69〜79を進める。漢字も確認。']],
+ '2026-11-08':[['数学',60,'教科書P107〜120、数学の友P49〜53。間違えた問題は途中式を書いて解き直す。'],['理科',60,'教科書P119〜136、問題集P30〜36。実験の目的・結果・理由を説明できるか確認。']],
+ '2026-11-09':[['数学',60,'教科書P121〜133、数学の友P54〜59。残りは中1・中2の基本計算を5〜10問復習。塾があれば先生に苦手問題を質問。'],['英語',60,'教科書P62〜76、英語の基本学習P52〜71、語順トレーニングP15〜25。まず基本問題を優先。']],
+ '2026-11-10':[['理科',60,'教科書P137〜153、問題集P37〜42・44・45・46①・47。ダニエル電池は除外。指定プリントを確認。'],['社会',60,'公民教科書P66〜99、公民ワークP43まで（地方自治除外）。間違えた設問と提出物を確認。']],
+ '2026-11-11':[['英語',60,'11/12のテスト直前。教科書P47〜76と基本学習・語順トレーニングの間違えた問題だけ復習。'],['国語',60,'11/12のテスト直前。国語の学習P95〜99・114〜129、単元テスト5・6・8・10、漢字・文法ミニテストを重点復習。']],
+ '2026-11-12':[['数学',60,'11/13のテストに備え、数学の友P44〜59の間違えた問題を解き直し、基本計算を10問。'],['社会',60,'11/13のテストに備え、公民ワークの間違いと教科書P44〜99の重要語句を確認。技術・家庭のノート提出も最終確認。']]
+};
+const TECH_HOME_NOTE='技術：教科書P88〜137・P198〜215、指定ノートP48〜65・P98〜106・P124〜125、Life is Tech Chapter 1。家庭：教科書P220〜255、ノートP104〜119・P122〜123（省略箇所に注意）。11/13の提出物も確認。';
+
+const lesson={
+ '数学':['中1・中2の計算と方程式を解き、間違えた問題をやり直す'],
+ '理科':['苦手単元の基本用語・実験問題を学校のワークで解く'],
+ '英語':['基本単語10個と中1・中2の文法、短い英文を練習'],
+ '社会':['一問一答で基本語句、地図・資料問題を復習'],
+ '国語':['漢字・文法と短い文章の読解を練習']
+};
+const WEEK={0:[['理科',60],['英語',60]],1:[['数学',60],['理科',60]],2:[['英語',60],['社会',60]],3:[['数学',60],['理科',60]],4:[['英語',60],['国語',60]],5:[['数学',60],['理科',60],['英語',60]],6:[['社会',60],['国語',60]]};
+const WINTER={0:[['理科',60],['数学',60],['社会',60],['英語',60]],1:[['数学',60],['理科',60],['英語',60],['社会',60]],2:[['理科',60],['数学',60],['国語',60],['英語',60]],3:[['数学',60],['理科',60],['社会',60],['英語',60]],4:[['数学',60],['英語',60],['理科',60],['国語',60]],5:[['理科',60],['数学',60],['社会',60],['英語',60]],6:[['数学',60],['理科',60],['国語',60],['社会',60]]};
+const $=id=>document.getElementById(id);const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const shift=(s,n)=>{let d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return iso(d)};
+const now=()=>{let parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());let o={};parts.forEach(p=>o[p.type]=p.value);return `${o.year}-${o.month}-${o.day}`};
+let state;try{state=JSON.parse(localStorage.getItem(KEY))||{days:{},scores:{}}}catch{state={days:{},scores:{}}}state.days||={};state.scores||={};state.testRanges||={};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){alert('端末への保存に失敗しました。空き容量などを確認してね。')}window.studyCloudSave?.(state);};
+const inRange=d=>d>=START&&d<=END;
+let selected=inRange(now())?now():START;
+function phase(d){if(['2026-11-12','2026-11-13','2027-01-12','2027-01-13'].includes(d))return ['test','テスト当日：復習は軽めでOK','今日はテスト。終わったら間違いをメモしよう'];if(['2027-02-02','2027-02-16','2027-03-04','2027-03-05'].includes(d))return ['exam','入試当日：体調と時間を優先','当日の予定を最優先。勉強は無理しない'];if(d<='2026-11-11')return ['pre','11月12・13日のテスト直前','今回のテスト範囲だけを優先。中1・中2の総復習はテスト後から'];if(d<='2026-12-23')return ['foundation','基礎をやり直す時期','1日2〜3教科、45〜60分を目安に基礎から'];if(d<='2027-01-07')return ['winter','冬休み集中期間（仮日程）','基本4時間（年始3日間は2時間）。数学の冬期講習は学習時間に含めてOK'];if(d<='2027-01-11')return ['practice','1月12・13日のテスト直前','苦手単元と間違い直しを優先'];if(d<='2027-02-01')return ['interview','前期選抜対策','面接練習と学力の基礎固めを両立'];return ['after','後期選抜に向けた対策','5教科の基本問題・過去問を練習'];}
+let cramDay='1';try{cramDay=localStorage.getItem(SETKEY)||'1'}catch{};
+function makeTasks(d){
+ const [kind]=phase(d),weekday=new Date(d+'T12:00:00').getDay();
+ if(kind==='exam')return [{id:'exam-0',name:'準備',minutes:15,detail:'会場・時間・持ち物を確認して早めに休む'}];
+ if(kind==='test'&&d==='2026-11-12')return PRE_DAY[d].map((x,i)=>({id:'prelast-'+i+'-'+x[0],name:x[0],minutes:x[1],detail:x[2]}));
+ if(kind==='test')return [{id:'test-0',name:'振り返り',minutes:30,detail:'分からなかった問題をメモして、解き直しをする'}];
+ let entries=(kind==='winter'?WINTER[weekday]:WEEK[weekday]).map(x=>[...x]);
+ if(d>='2027-01-01'&&d<='2027-01-03')entries=entries.slice(0,2);
+ if(weekday===Number(cramDay)){
+   let ix=entries.findIndex(x=>x[0]==='数学');
+   if(ix<0)entries[0]=['数学',60];
+ }
+ if(kind==='pre'&&PRE_DAY[d])return PRE_DAY[d].map((x,i)=>({id:'prerange-'+d+'-'+i+'-'+x[0],name:x[0],minutes:x[1],detail:x[2]}));
+ if(kind==='pre'){
+   const prePlan={0:[['社会',60],['理科',60]],1:[['数学',60],['英語',60]],2:[['理科',60],['社会',60]],3:[['数学',60],['理科',60]],4:[['数学',60],['理科',60]],5:[['英語',60],['社会',60],['国語',60]],6:[['数学',60],['理科',60]]};
+   entries=prePlan[weekday];
+ }
+ if(d>='2026-12-06'&&d<='2027-01-11'&&weekday===0){entries[0][1]-=20;entries.push(['自己PR',20]);}
+ if(kind==='interview'&&weekday===0)entries=[['面接',45],['理科',60]];
+ if(kind==='after'&&weekday===0)entries=[['国語',60],['社会',60]];
+ return entries.map((x,i)=>({id:kind+'-'+weekday+'-'+i+'-'+x[0],name:x[0],minutes:x[1],detail:x[0]==='自己PR'?'12月から週1回の自己PR練習。①志望理由を1分で話す ②学級委員長やサッカーで頑張ったことを具体的に話す ③情報ビジネス探究科で学びたいことを話す。家族に聞いてもらい、最後に振り返る':x[0]==='面接'?'千原台の志望理由、学級委員長やサッカーの経験を話す':(kind==='pre'?`${state.testRanges[x[0]]? 'テスト範囲：'+state.testRanges[x[0]]+'。':'学校のテスト範囲表で該当する単元・ページを確認。'}①教科書・授業ノートを10分確認 → ②学校のワークを35分解く → ③間違えた問題を15分解き直す。${x[0]==='数学'&&weekday===Number(cramDay)?'塾があれば授業時間に置き換え可。':''}`:(x[0]==='数学'&&weekday===Number(cramDay)?'個別指導の数学（塾の授業を含む）。習った問題を解き直す':lesson[x[0]][0]))}));
+}
+function dayData(d){return state.days[d]||{checks:{},times:{},understand:{},memo:''}}
+function fmt(n){n=Math.round(n);return n>=60?`${Math.floor(n/60)}時間${n%60?`${n%60}分`:''}`:`${n}分`}
+function renderStudent(){
+ const showRanges=selected<='2026-11-11';
+ $('rangeFields').parentElement.style.display=showRanges?'block':'none';
+ if(showRanges){$('rangeFields').innerHTML=S.map(sub=>`<label style="display:block;margin:8px 0;font-size:13px"><b>${sub}の範囲</b><input class="field range-input" data-subject="${sub}" value="${esc(state.testRanges[sub]||EXAM_RANGES[sub]||'')}" placeholder="例：学校ワークp.20〜35／単元名"></label>`).join('');}
+ $('cramDay').value=cramDay;let d=selected; $('date').value=d;let [kind,label,description]=phase(d);$('phase').textContent=label+'｜'+description;let special=kind==='test'||kind==='exam';$('event').innerHTML=(special?`<div class="warn">${esc(description)}</div>`:'')+(d>='2026-11-06'&&d<='2026-11-12'?`<div class="warn" style="margin-top:8px"><b>技術・家庭の提出物も確認</b><br>${esc(TECH_HOME_NOTE)}</div>`:'');let day=dayData(d),tasks=makeTasks(d),completed=tasks.filter(t=>day.checks[t.id]).length,minutes=tasks.reduce((a,t)=>a+(day.checks[t.id]?(Number(day.times[t.id])||t.minutes):0),0),planned=tasks.reduce((a,t)=>a+t.minutes,0);$('dailyDone').textContent=completed+' / '+tasks.length;$('dailyProgress').style.width=(100*completed/tasks.length)+'%';$('dailyMinutes').textContent=`記録した時間 ${fmt(minutes)} ／ 今日の計画 ${fmt(planned)}（目安）`; $('taskList').innerHTML=tasks.map(t=>`<div class="task ${day.checks[t.id]?'done':''}"><label class="taskhead"><input type="checkbox" data-id="${t.id}" data-field="check" ${day.checks[t.id]?'checked':''}><div class="taskbody"><div class="taskname">${esc(t.name)}</div><div class="taskmeta"><span class="tag">目安 ${t.minutes}分</span>${t.name==='数学'&&new Date(d+'T12:00:00').getDay()===Number(cramDay)?'<span class="tag">冬期講習もカウント</span>':''}</div><div class="tasknotes">${esc(t.detail)}</div></div></label><div class="taskextra"><small>実際の時間</small><input type="number" min="0" max="480" step="5" data-id="${t.id}" data-field="time" value="${day.times[t.id]??t.minutes}" aria-label="${esc(t.name)}の学習分数"><small>理解度</small><select data-id="${t.id}" data-field="understand"><option value="">選択なし</option>${[['◎','自分で解けた'],['○','だいたいできた'],['△','復習が必要']].map(([v,l])=>`<option value="${v}" ${day.understand[t.id]===v?'selected':''}>${v} ${l}</option>`).join('')}</select></div></div>`).join('');$('dayMemo').value=day.memo||''}
+function updateTask(el){let id=el.dataset.id,field=el.dataset.field,d=selected;state.days[d]||={checks:{},times:{},understand:{},memo:''};let a=state.days[d];if(field==='check')a.checks[id]=el.checked;if(field==='time')a.times[id]=Math.max(0,Math.min(480,Number(el.value)||0));if(field==='understand')a.understand[id]=el.value;save();if(field==='check')renderStudent();else{let tasks=makeTasks(d);let minutes=tasks.reduce((sum,t)=>sum+(a.checks[t.id]?(Number(a.times[t.id])||0):0),0);$('dailyMinutes').textContent=`記録した時間 ${fmt(minutes)} ／ 今日の計画 ${fmt(tasks.reduce((x,t)=>x+t.minutes,0))}（目安）`;}}
+function collect(){let entries=Object.entries(state.days).filter(([date])=>inRange(date));let byS={},total=0,done=0,fullDays=new Set();const records=[];for(const [d,a] of entries){let tasks=makeTasks(d),cnt=0,mins=0;for(const t of tasks){if(a.checks?.[t.id]){let v=Math.max(0,Number(a.times?.[t.id] ?? t.minutes));byS[t.name]=(byS[t.name]||0)+v;mins+=v;cnt++;done++;}}total+=mins;if(cnt===tasks.length)fullDays.add(d);records.push({d,cnt,len:tasks.length,mins,memo:a.memo||''})}return {byS,total,done,fullDays,records}}
+function renderParent(){let v=collect();$('sumDone').textContent=v.done+'件';$('sumTime').textContent=fmt(v.total);let today=inRange(now())?now():END;let last=Array.from({length:7},(_,i)=>shift(today,-i));let week=v.records.filter(r=>last.includes(r.d));$('lastWeek').textContent=week.filter(r=>r.cnt===r.len&&r.len>0).length+'日';$('lastWeekTime').textContent=fmt(week.reduce((s,r)=>s+r.mins,0));let max=Math.max(1,...Object.values(v.byS));$('subjectTotals').innerHTML=[...S,'面接','振り返り','暗記','準備'].filter(s=>v.byS[s]).map(s=>`<div class="borderbottom"><div class="row"><b>${s}</b><span>${fmt(v.byS[s])}</span></div><div class="bar"><span style="width:${v.byS[s]/max*100}%"></span></div></div>`).join('')||'<div class="blank">勉強をチェックすると教科別に表示されるよ。</div>';
+let dates=Array.from({length:14},(_,i)=>shift(today,-i)).filter(inRange);$('history').innerHTML=dates.map(d=>{let r=v.records.find(x=>x.d===d),data=r||{cnt:0,len:makeTasks(d).length,mins:0};return `<div class="row borderbottom"><span><b>${d.slice(5).replace('-','/')}</b> <small>${data.cnt}/${data.len}件</small></span><span>${fmt(data.mins)} ${data.cnt===data.len?'<span class="success">✓</span>':''}</span></div>`}).join('');$('scoreRows').innerHTML=[['2026-11-12','11月テスト'],['2027-01-12','1月テスト']].map(([d,label])=>`<div class="row borderbottom"><label for="score-${d}">${label} <small>（合計250点）</small></label><div><input id="score-${d}" type="number" min="0" max="250" value="${state.scores[d]??''}" class="field" style="width:95px" placeholder="未入力"> 点</div></div>`).join('');$('scoreRows').querySelectorAll('input').forEach(el=>el.addEventListener('change',()=>{let n=el.value;if(n!==''&&(Number(n)<0||Number(n)>250)){alert('0〜250点で入力してね');return}state.scores[el.id.slice(6)]=n;save()}))}
+function tab(t){let student=t==='student';$('studentView').classList.toggle('hide',!student);$('parentView').classList.toggle('hide',student);$('studentTab').classList.toggle('active',student);$('parentTab').classList.toggle('active',!student);if(!student)renderParent()}
+$('cramDay').onchange=e=>{cramDay=e.target.value;try{localStorage.setItem(SETKEY,cramDay)}catch{}renderStudent()};$('studentTab').onclick=()=>tab('student');$('parentTab').onclick=()=>tab('parent');$('date').onchange=e=>{if(inRange(e.target.value)){selected=e.target.value;renderStudent()}};$('todayBtn').onclick=()=>{selected=inRange(now())?now():START;renderStudent()};$('previous').onclick=()=>{let d=shift(selected,-1);if(inRange(d)){selected=d;renderStudent()}};$('next').onclick=()=>{let d=shift(selected,1);if(inRange(d)){selected=d;renderStudent()}};
+$('rangeFields').addEventListener('change',e=>{if(e.target.classList.contains('range-input')){state.testRanges[e.target.dataset.subject]=e.target.value;save();renderStudent()}});
+ $('taskList').addEventListener('change',e=>{if(e.target.dataset.field)updateTask(e.target)});$('dayMemo').addEventListener('input',e=>{state.days[selected]||={checks:{},times:{},understand:{},memo:''};state.days[selected].memo=e.target.value;save()});$('resetDay').onclick=()=>{if(!confirm(`${selected} のチェックを全部外す？`))return;state.days[selected]||={checks:{},times:{},understand:{},memo:''};state.days[selected].checks={};save();renderStudent()};
+$('exportBtn').onclick=()=>{let blob=new Blob([JSON.stringify({app:'chiharadai-study',version:5,exportedAt:new Date().toISOString(),...state},null,2)],{type:'application/json'});let u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='chiharadai-study-records.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),2000)};
+$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{let f=e.target.files?.[0];if(!f)return;try{let x=JSON.parse(await f.text());if(x.app!=='chiharadai-study'||!x.days||typeof x.days!=='object')throw Error();if(!confirm('現在の端末の記録を、読み込んだ記録で置き換えていい？'))return;state={days:x.days,scores:x.scores||{},testRanges:x.testRanges||{}};save();renderStudent();renderParent();alert('読み込み完了')}catch{alert('対応する記録ファイルではないみたい。')}e.target.value=''};
+window.studyBridge={get:()=>JSON.parse(JSON.stringify(state)),set:x=>{state={days:x?.days||{},scores:x?.scores||{},testRanges:x?.testRanges||{}};saveLocalOnly();renderStudent();renderParent()},view:tab};function saveLocalOnly(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}};renderStudent();
+})();
+</script>
+<script type="module">
+const $=id=>document.getElementById(id);
+const status=(msg,good=false)=>{const el=$('syncStatus');el.textContent=msg;el.className=good?'success':'warn'};
+let db=null,user=null,member=null,family=null,loading=false,timer=null,lastSaved='',remoteLoad=false;
+const CFG='chiharadai-cloud-config';
+let config={};try{config=JSON.parse(localStorage.getItem(CFG)||'{}')}catch{}
+$('projectUrl').value=config.url||'';$('publishableKey').value=config.key||'';
+async function connect(){
+ try {
+  const url=$('projectUrl').value.trim(),key=$('publishableKey').value.trim();
+  if(!/^https:\/\/[\w-]+\.supabase\.co$/.test(url)||!key.startsWith('sb_publishable_'))throw Error('正しいProject URLと公開用キーを入力してね。');
+  const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2.57.0');
+  db=createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+  localStorage.setItem(CFG,JSON.stringify({url,key}));
+  const {data,error}=await db.auth.getUser();if(error && !/session missing|Auth session missing/i.test(error.message))throw error;
+  user=data?.user||null;
+  db.auth.onAuthStateChange((_event,session)=>{user=session?.user||null;setTimeout(()=>bootstrap(),20)});
+  await bootstrap();
+ }catch(e){status('接続エラー：'+(e.message||String(e)));}
+}
+async function bootstrap(){
+ if(loading)return;loading=true;
+ try{
+  $('cloudAuth').classList.toggle('hide',!!user);
+  $('cloudPair').classList.toggle('hide',!user);
+  $('userEmail').textContent=user?.email||'';
+  if(!user){member=null;family=null;status('クラウドに接続済み。メールでログインしてね。');return;}
+  const {data,error}=await db.from('study_members').select('family_id,role').eq('user_id',user.id).maybeSingle();if(error)throw error;
+  member=data||null;family=member?.family_id||null;
+  $('pairActions').classList.toggle('hide',!!family);$('familyReady').classList.toggle('hide',!family);
+  if(family){
+   $('myRole').textContent=member.role==='parent'?'保護者モード：息子くんの記録を閲覧できます':'生徒モード：今日の勉強を記録できます';
+   $('inviteBlock').classList.toggle('hide',member.role!=='parent');
+   if(member.role==='parent'){
+    const {data:f,error:fe}=await db.from('study_families').select('invite_code').eq('id',family).single();if(fe)throw fe;$('showCode').value=f.invite_code;
+   }
+   // Parents can view only; students can edit their own study records.
+   $('studentTab').classList.toggle('hide',member.role==='parent');
+   await pull();window.studyBridge.view(member.role==='parent'?'parent':'student');
+   status('✅ 同期接続中。'+(member.role==='parent'?'息子くんの最新の記録を表示しています。':'チェックした記録をクラウドに保存します。'),true);
+  }else{status('ログイン済み。保護者は家族を作成、息子くんは招待コードで参加してね。',true)}
+ }catch(e){status('設定確認：'+e.message)}finally{loading=false}
+}
+async function pull(){if(!family||!db)return;try{
+ const {data,error}=await db.from('study_records').select('payload').eq('family_id',family).single();if(error)throw error;
+ remoteLoad=true;window.studyBridge.set(data.payload||{days:{},scores:{}});remoteLoad=false;lastSaved=JSON.stringify(window.studyBridge.get());
+}catch(e){remoteLoad=false;status('読み込みエラー：'+e.message)}}
+async function push(){if(!family||member?.role!=='student'||!db)return;
+ const payload=window.studyBridge.get(),serialized=JSON.stringify(payload);if(serialized===lastSaved)return;
+ const {error}=await db.from('study_records').update({payload,updated_at:new Date().toISOString()}).eq('family_id',family);
+ if(error)status('保存できませんでした：'+error.message);else {lastSaved=serialized;status('✅ 保存完了。里奈ちゃん側でも確認できるよ。',true)}
+}
+window.studyCloudSave=()=>{if(remoteLoad||member?.role!=='student')return;clearTimeout(timer);timer=setTimeout(()=>push().catch(e=>status('同期エラー：'+e.message)),600)};
+$('connectCloud').onclick=connect;
+$('sendMail').onclick=async()=>{if(!db)return;const email=$('loginEmail').value.trim();if(!email.includes('@'))return status('メールアドレスを入力してね');const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});status(error?'メール送信エラー：'+error.message:'メールを送ったよ。届いたログインリンクを開いてね。')};
+$('makeFamily').onclick=async()=>{if(!db||!user)return;const {error}=await db.rpc('study_create_family');if(error)return status(error.message);await bootstrap()};
+$('joinFamily').onclick=async()=>{if(!db||!user)return;const code=$('familyCode').value.trim().toLowerCase();const {error}=await db.rpc('study_join_family',{p_code:code});if(error)return status('参加できません：'+error.message);await bootstrap()};
+$('copyCode').onclick=async()=>{try{await navigator.clipboard.writeText($('showCode').value);status('招待コードをコピーしたよ。息子くんだけに送ってね。',true)}catch{ $('showCode').select();status('招待コードを選択したよ。長押しでコピーしてね。')}};
+$('refreshCloud').onclick=()=>pull();
+$('logoutCloud').onclick=async()=>{if(db)await db.auth.signOut();member=null;family=null;location.reload()};
+// Periodic refresh helps the parent see new records even if live subscriptions are unavailable.
+setInterval(()=>{if(member?.role==='parent'&&document.visibilityState==='visible')pull()},15000);
+window.addEventListener('focus',()=>{if(member?.role==='parent')pull()});
+if(config.url&&config.key)connect();
+</script>
+</body></html>
