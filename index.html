@@ -134,7 +134,7 @@ window.studyBridge={get:()=>JSON.parse(JSON.stringify(state)),set:x=>{state={day
 <script type="module">
 const $=id=>document.getElementById(id);
 const status=(msg,good=false)=>{const el=$('syncStatus');el.textContent=msg;el.className=good?'success':'warn'};
-let db=null,user=null,member=null,family=null,loading=false,timer=null,lastSaved='',remoteLoad=false;
+let db=null,user=null,member=null,family=null,loading=false,pending=false,authErr='',bootUid=null,dirty=false,gen=0,timer=null,lastSaved='',remoteLoad=false;
 const CFG='chiharadai-cloud-config';
 let config={};try{config=JSON.parse(localStorage.getItem(CFG)||'{}')}catch{}
 $('projectUrl').value=config.url||'';$('publishableKey').value=config.key||'';
@@ -145,19 +145,25 @@ async function connect(){
   const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2.57.0');
   db=createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
   localStorage.setItem(CFG,JSON.stringify({url,key}));
-  const {data,error}=await db.auth.getUser();if(error && !/session missing|Auth session missing/i.test(error.message))throw error;
-  user=data?.user||null;
-  db.auth.onAuthStateChange((_event,session)=>{user=session?.user||null;setTimeout(()=>bootstrap(),20)});
+  // Register the listener first so the SIGNED_IN event from the email-link callback is never missed.
+  db.auth.onAuthStateChange((_event,session)=>{const nu=session?.user||null;const same=!!nu&&nu.id===bootUid&&nu.id===user?.id;user=nu;if(!same)setTimeout(()=>bootstrap(),20)});
+  // getSession waits for the URL callback (token in the link) to be processed before returning.
+  const hp=new URLSearchParams((location.hash||'').replace(/^#/,'')),qp=new URLSearchParams(location.search);
+  authErr=(hp.get('error_description')||qp.get('error_description')||'').replace(/\+/g,' ');
+  const {error:ie}=await db.auth.initialize();if(ie&&!authErr)authErr=ie.message;
+  const {data,error}=await db.auth.getSession();if(error)throw error;
+  user=data?.session?.user||null;
   await bootstrap();
  }catch(e){status('接続エラー：'+(e.message||String(e)));}
 }
 async function bootstrap(){
- if(loading)return;loading=true;
+ if(loading){pending=true;return}loading=true;pending=false;
  try{
   $('cloudAuth').classList.toggle('hide',!!user);
   $('cloudPair').classList.toggle('hide',!user);
   $('userEmail').textContent=user?.email||'';
-  if(!user){member=null;family=null;status('クラウドに接続済み。メールでログインしてね。');return;}
+  if(!user){member=null;family=null;status(authErr?'ログインリンクが使えませんでした：'+authErr+'（もう一度メールを送ってね）':'クラウドに接続済み。メールでログインしてね。');return;}
+  authErr='';
   const {data,error}=await db.from('study_members').select('family_id,role').eq('user_id',user.id).maybeSingle();if(error)throw error;
   member=data||null;family=member?.family_id||null;
   $('pairActions').classList.toggle('hide',!!family);$('familyReady').classList.toggle('hide',!family);
@@ -172,18 +178,19 @@ async function bootstrap(){
    await pull();window.studyBridge.view(member.role==='parent'?'parent':'student');
    status('✅ 同期接続中。'+(member.role==='parent'?'息子くんの最新の記録を表示しています。':'チェックした記録をクラウドに保存します。'),true);
   }else{status('ログイン済み。保護者は家族を作成、息子くんは招待コードで参加してね。',true)}
- }catch(e){status('設定確認：'+e.message)}finally{loading=false}
+ }catch(e){status('設定確認：'+e.message)}finally{bootUid=user?.id||null;loading=false;if(pending){pending=false;setTimeout(()=>bootstrap(),0)}}
 }
-async function pull(){if(!family||!db)return;try{
+async function pull(){if(!family||!db||dirty)return;const g=gen;try{
  const {data,error}=await db.from('study_records').select('payload').eq('family_id',family).single();if(error)throw error;
+ if(dirty||g!==gen)return;
  remoteLoad=true;window.studyBridge.set(data.payload||{days:{},scores:{}});remoteLoad=false;lastSaved=JSON.stringify(window.studyBridge.get());
 }catch(e){remoteLoad=false;status('読み込みエラー：'+e.message)}}
 async function push(){if(!family||member?.role!=='student'||!db)return;
- const payload=window.studyBridge.get(),serialized=JSON.stringify(payload);if(serialized===lastSaved)return;
+ const payload=window.studyBridge.get(),serialized=JSON.stringify(payload);if(serialized===lastSaved){dirty=false;return}
  const {error}=await db.from('study_records').update({payload,updated_at:new Date().toISOString()}).eq('family_id',family);
- if(error)status('保存できませんでした：'+error.message);else {lastSaved=serialized;status('✅ 保存完了。里奈ちゃん側でも確認できるよ。',true)}
+ if(error)status('保存できませんでした：'+error.message);else {lastSaved=serialized;if(JSON.stringify(window.studyBridge.get())===serialized)dirty=false;status('✅ 保存完了。里奈ちゃん側でも確認できるよ。',true)}
 }
-window.studyCloudSave=()=>{if(remoteLoad||member?.role!=='student')return;clearTimeout(timer);timer=setTimeout(()=>push().catch(e=>status('同期エラー：'+e.message)),600)};
+window.studyCloudSave=()=>{if(remoteLoad||member?.role!=='student')return;dirty=true;gen++;clearTimeout(timer);timer=setTimeout(()=>push().catch(e=>status('同期エラー：'+e.message)),600)};
 $('connectCloud').onclick=connect;
 $('sendMail').onclick=async()=>{if(!db)return;const email=$('loginEmail').value.trim();if(!email.includes('@'))return status('メールアドレスを入力してね');const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});status(error?'メール送信エラー：'+error.message:'メールを送ったよ。届いたログインリンクを開いてね。')};
 $('makeFamily').onclick=async()=>{if(!db||!user)return;const {error}=await db.rpc('study_create_family');if(error)return status(error.message);await bootstrap()};
